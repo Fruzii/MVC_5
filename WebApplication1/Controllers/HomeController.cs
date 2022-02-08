@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,10 +15,11 @@ namespace WebApplication1.Controllers
 
 		public ActionResult Index()
 		{
-			IEnumerable<Book> books = db.Books;
-			ViewBag.Books = books;
-			return View();
+			ViewBag.Message = "Это вызов частичного представления из обычного";
+			return View(db.Books);
 		}
+
+
 
 		[HttpGet]
 		public ActionResult Buy(int id)
@@ -25,7 +27,6 @@ namespace WebApplication1.Controllers
 			ViewBag.BookId = id;
 			return View();
 		}
-
 		[HttpPost]
 		public string Buy(Purchase purchase)
 		{
@@ -35,6 +36,92 @@ namespace WebApplication1.Controllers
 			// сохраняем в бд все изменения
 			db.SaveChanges();
 			return "Спасибо," + purchase.Person + ", за покупку!";
+		}
+
+
+
+		[HttpGet]
+		public ActionResult EditBook(int? id)
+		{
+			if (id == null)
+			{
+				return HttpNotFound();
+			}
+			Book book = db.Books.Find(id);
+			if (book != null)
+			{
+				return View(book);
+			}
+			return HttpNotFound();
+		}
+		[HttpPost]
+		public ActionResult EditBook(Book book)
+		{
+			db.Entry(book).State = EntityState.Modified;
+			db.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
+
+
+		[HttpGet]
+		public ActionResult Create()
+		{
+			return View();
+		}
+		[HttpPost]
+		public ActionResult Create(Book book)
+		{
+			db.Books.Add(book);
+			db.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
+		//[HttpPost]
+		//public ActionResult Create(Book book)
+		//{
+		//	db.Entry(book).State = EntityState.Added;
+		//	db.SaveChanges();
+
+		//	return RedirectToAction("Index");
+		//}
+
+
+
+		[HttpGet]
+		public ActionResult Delete(int id)
+		{
+			Book b = db.Books.Find(id);
+			if (b == null)
+			{
+				return HttpNotFound();
+			}
+			return View(b);
+		}
+		[HttpPost, ActionName("Delete")]
+		public ActionResult DeleteConfirmed(int id)
+		{
+			Book b = db.Books.Find(id);
+			if (b == null)
+			{
+				return HttpNotFound();
+			}
+			db.Books.Remove(b);
+			db.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
+
+
+		[HttpGet]
+		public ActionResult Detail(int id)
+		{
+			Book b = db.Books.Find(id);
+			if (b == null)
+			{
+				return HttpNotFound();
+			}
+			return View(b);
 		}
 	}
 }

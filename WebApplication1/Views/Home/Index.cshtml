@@ -1,5 +1,8 @@
-﻿@{
-    ViewBag.Title = "Книжный магазин";
+﻿@using WebApplication1.Models
+@model IEnumerable<Book>
+
+@{
+	ViewBag.Title = "Книжный магазин";
 }
 
 <div>
@@ -11,7 +14,7 @@
 			<td><p>Цена</p></td>
 			<td></td>
 		</tr>
-		@foreach (var b in ViewBag.Books)
+		@foreach (var b in Model)
 		{
 			<tr>
 				<td><p>@b.Name</p></td>
@@ -21,4 +24,6 @@
 			</tr>
 		}
 	</table>
+	@*@Html.Action("Partial", "My")*@
+	@Html.Partial("~/Views/My/Partial.cshtml")
 </div>

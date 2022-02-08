@@ -69,5 +69,11 @@ namespace WebApplication1.Controllers
 			return "<p>User-Agent: " + user_agent + "</p><p>Url запроса: " + url +
 					"</p><p>Реферер: " + referrer + "</p><p>IP-адрес: " + ip + "</p>";
 		}
+
+		public ActionResult Partial()
+		{
+			ViewBag.Message = "Это частичное представление.";
+			return PartialView();
+		}
 	}
 }
