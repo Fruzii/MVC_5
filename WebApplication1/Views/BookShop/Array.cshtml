@@ -1,0 +1,18 @@
+﻿@using WebApplication1.Models
+@model Book
+@{
+				/**/
+
+				ViewBag.Title = "Array";
+}
+@{
+	Book myBook = new Book() { Name = "Мартин Иден", Author = "Джек Лондон", Price = 190 };
+}
+<h2>Книги</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.EditorFor(m => myBook)
+	@Html.EditorForModel()
+	<input type="submit" />
+}

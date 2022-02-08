@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer", "Soccer\Soccer.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Univer", "Univer\Univer.csproj", "{D78B243E-4926-43A1-A763-50A0333D92EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu", "Menu\Menu.csproj", "{C65A149C-803C-4FCF-ADD1-DDB0CE6C4EEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D78B243E-4926-43A1-A763-50A0333D92EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D78B243E-4926-43A1-A763-50A0333D92EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D78B243E-4926-43A1-A763-50A0333D92EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C65A149C-803C-4FCF-ADD1-DDB0CE6C4EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C65A149C-803C-4FCF-ADD1-DDB0CE6C4EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C65A149C-803C-4FCF-ADD1-DDB0CE6C4EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C65A149C-803C-4FCF-ADD1-DDB0CE6C4EEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

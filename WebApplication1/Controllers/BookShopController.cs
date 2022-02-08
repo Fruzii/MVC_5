@@ -19,55 +19,52 @@ namespace WebApplication1.Controllers
 		}
 
 
-
 		[HttpGet]
-		public ActionResult Detail(int id)
+		public ActionResult Array()
 		{
-			Book b = db.Books.Find(id);
-			if (b == null)
-			{
-				return HttpNotFound();
-			}
-			return View(b);
-		}
-
-
-		[HttpGet]
-		public ActionResult EditBook(int? id)
-		{
-			if (id == null)
-			{
-				return HttpNotFound();
-			}
-			Book book = db.Books.Find(id);
-			if (book != null)
-			{
-				return View(book);
-			}
-			return HttpNotFound();
+			Book firstBook = db.Books.ToList<Book>().FirstOrDefault();
+			return View(firstBook);
 		}
 		[HttpPost]
-		public ActionResult EditBook(Book book)
+		public string Array(List<string> names)
 		{
-			db.Entry(book).State = EntityState.Modified;
-			db.SaveChanges();
-			return RedirectToAction("Index");
+			string fin = "";
+			for (int i = 0; i < names.Count; i++)
+			{
+				fin += names[i] + ";  ";
+			}
+			return fin;
 		}
 
 
 
 		[HttpGet]
-		public ActionResult Create()
+		public ActionResult Add()
+		{
+			return View(db.Books.ToList());
+		}
+		[HttpPost]
+		public string Add(List<Book> books)
+		{
+			string str = "";
+			foreach (Book b in books)
+			{
+				str += $"{b.Name}\n\n";
+			}
+			return str;
+		}
+
+
+
+		[HttpGet]
+		public ActionResult GetAuthor()
 		{
 			return View();
 		}
 		[HttpPost]
-		public ActionResult Create(Book book)
+		public ActionResult GetAuthor(Author author)
 		{
-			db.Books.Add(book);
-			db.SaveChanges();
-
-			return RedirectToAction("Index");
+			return View();
 		}
 	}
 }

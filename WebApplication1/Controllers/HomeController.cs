@@ -8,15 +8,22 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+	[Authorize]
 	public class HomeController : Controller
 	{
 
 		BookContext db = new BookContext();
 
-		public ActionResult Index()
+		public ActionResult Index(int page = 1)
 		{
+			List<Book> books = db.Books.ToList();
+			int pageSize = 3; // количество объектов на страницу
+			IEnumerable<Book> booksPerPages = books.Skip((page - 1) * pageSize).Take(pageSize);
+			PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = books.Count };
+			IndexViewModel ivm = new IndexViewModel { PageInfo = pageInfo, Books = booksPerPages };
 			ViewBag.Message = "Это вызов частичного представления из обычного";
-			return View(db.Books);
+			return View(ivm);
+			//return View(db.Books);
 		}
 
 

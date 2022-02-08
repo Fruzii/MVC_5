@@ -1,5 +1,5 @@
-﻿@using WebApplication1.Models
-@model IEnumerable<Book>
+﻿@model WebApplication1.Models.IndexViewModel
+@using WebApplication1.Helpers
 
 @{
 	ViewBag.Title = "Книжный магазин";
@@ -7,6 +7,7 @@
 
 <div>
 	<h3>Распродажа книг</h3>
+	@Html.ActionLink("Добавить книгу", "Create")
 	<table>
 		<tr>
 			<td><p>Название книги</p></td>
@@ -14,7 +15,7 @@
 			<td><p>Цена</p></td>
 			<td></td>
 		</tr>
-		@foreach (var b in Model)
+		@foreach (var b in Model.Books)
 		{
 			<tr>
 				<td><p>@b.Name</p></td>
@@ -24,6 +25,8 @@
 			</tr>
 		}
 	</table>
+	@Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+
 	@*@Html.Action("Partial", "My")*@
 	@Html.Partial("~/Views/My/Partial.cshtml")
 </div>
